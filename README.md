@@ -1,0 +1,3 @@
+Учебный проект по овладению Django
+...
+Django! Django!! Django!!!
