@@ -3,7 +3,7 @@ from django.views import View
 
 
 class IndexView(View):
-    def get(self, request):
-        name = 'Article'
+    def get(self, request, tags, article_id):
+        context = {'text': f'Статья номер {article_id}. Тег {tags}'}
 
-        return render(request, 'articles/index.html', context={'name': name})
+        return render(request, 'articles/index.html', context=context)
