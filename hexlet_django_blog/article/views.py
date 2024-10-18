@@ -1,8 +1,9 @@
 from django.shortcuts import render
+from django.views import View
 
 
-def index(request):
-    name = 'Article (context)'
-    description = 'Овладеваю Django'
-    joke = 'Django! Django!! Django!!!'
-    return render(request, 'articles/index.html', context={'name': name, 'description': description, 'joke': joke})
+class IndexView(View):
+    def get(self, request):
+        name = 'Article'
+
+        return render(request, 'articles/index.html', context={'name': name})
