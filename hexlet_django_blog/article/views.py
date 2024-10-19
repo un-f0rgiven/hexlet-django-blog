@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from hexlet_django_blog.article.models import Article, Comment
+from hexlet_django_blog.article.models import Article
+from hexlet_django_blog.article.forms import ArticleForm
+from django.contrib import messages
 
 
 class IndexView(View):
@@ -17,8 +19,17 @@ class ArticleView(View):
         return render(request, 'articles/show.html', context={'article': article,})
 
 
-class ArticleCommentsView(View):
+class ArticleFormCreateView(View):
     def get(self, request, *args, **kwargs):
-        comment = get_object_or_404(Comment, id=kwargs['id'], article__id=kwargs['article_id'])
+        form = ArticleForm()
 
-        return render(request, 'article/show.html', context={'comment': comment,})
+        return render(request, 'articles/create.html', context={'form': form})
+    
+    def post(self, request, *args, **kwargs):
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Статья добавлена успешно')
+            return redirect('articles_index')
+        messages.error(request, 'Статья не создана. Все поля должны быть заполнены')
+        return render(request, 'articles/create.html', {'form': form})
