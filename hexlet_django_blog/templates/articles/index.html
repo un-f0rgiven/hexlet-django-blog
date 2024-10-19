@@ -13,5 +13,6 @@
     {% for article in articles %}
         <h2><a href='{% url 'article' id=article.id %}'>{{ article.name }}</a></h2>
         <div>{{ article.body|slice:':200' }}</div>
+        <h4><a href='{% url 'articles_update' id=article.id %}'>Редактировать статью</a></h4>
     {% endfor %}
 {% endblock %}
