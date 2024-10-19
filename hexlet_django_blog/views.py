@@ -12,9 +12,9 @@ class IndexView(TemplateView):
         return context
 
 
-class HomePageView(View):
-    def get(self, request):
-        return redirect(reverse('article', kwargs={'tags': 'python', 'article_id': 42}))
+# class HomePageView(View):
+#     def get(self, request):
+#         return redirect(reverse('article', kwargs={'tags': 'python', 'article_id': 42}))
 
 def about(request):
     return render(request, 'about.html')
